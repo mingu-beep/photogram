@@ -1,4 +1,4 @@
-package com.cos.photogramstart.config;
+package com.cos.photogram.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable();
+        http.csrf().disable(); // csrf 토큰 비활성화
 
         http.authorizeRequests()
                 // 인증을 진행할 url 지정
