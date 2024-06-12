@@ -1,4 +1,4 @@
-package com.cos.photogramstart.config;
+package com.cos.photogram.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
