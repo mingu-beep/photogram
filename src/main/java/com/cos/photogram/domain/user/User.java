@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Builder // builder 패턴을 사용할 수 있게 함
 @AllArgsConstructor // 모든 생성자를 자동으로 생성
@@ -24,4 +25,10 @@ public class User {
     private String email;
     private String name;
 
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 }
