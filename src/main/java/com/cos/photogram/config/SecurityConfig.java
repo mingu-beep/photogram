@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/auth/signin") // GET : 인증 요청이 들어올 경우에는 loginPage에 지정한 페이지로 이동시킨다.
                 .loginProcessingUrl("/auth/signin") // POST : /auth/signin 요청이 들어왔을 떄 실행
-                .defaultSuccessUrl("/"); // 인증 완료시 루트페이지로 이동
+                .defaultSuccessUrl("/image/story"); // 인증 완료시 루트페이지로 이동
 
         return http.build();
     }
