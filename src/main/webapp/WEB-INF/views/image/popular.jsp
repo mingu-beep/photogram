@@ -10,31 +10,31 @@
 		<div class="popular-gallery">
 
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 			<div class="p-img-box">
-				<a href="/user/profile"> <img src="/images/home.jpg" />
+				<a href="/user/${principal.user.id}"> <img src="/images/home.jpg" />
 				</a>
 			</div>
 		</div>

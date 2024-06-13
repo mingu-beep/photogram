@@ -16,25 +16,25 @@
 					<img src="#" onerror="this.src='/images/person.jpeg'" />
 				</div>
 				<div class="item__username">
-					<h2>TherePrograming</h2>
+					<h2>${principal.user.username}</h2>
 				</div>
 			</div>
 			<!--프로필셋팅 아이디영역end-->
 
 			<!--프로필 수정-->
-			<form id="profileUpdate"">
+			<form id="profileUpdate" onSubmit="update(${principal.user.id}, event)">
 				<div class="content-item__02">
 					<div class="item__title">이름</div>
 					<div class="item__input">
 						<input type="text" name="name" placeholder="이름"
-							value="겟인데어" />
+							value="${principal.user.name}" />
 					</div>
 				</div>
 				<div class="content-item__03">
 					<div class="item__title">유저네임</div>
 					<div class="item__input">
 						<input type="text" name="username" placeholder="유저네임"
-							value="TherePrograming" readonly="readonly" />
+							value="${principal.user.username}" readonly="readonly" />
 					</div>
 				</div>
 				<div class="content-item__04">
@@ -46,14 +46,14 @@
 				<div class="content-item__05">
 					<div class="item__title">웹사이트</div>
 					<div class="item__input">
-						<input type="text" name="website" placeholder="웹 사이트"
-							value="https://github.com/codingspecialist" />
+						<input type="text" name="website"
+							value="${principal.user.website}" />
 					</div>
 				</div>
 				<div class="content-item__06">
 					<div class="item__title">소개</div>
 					<div class="item__input">
-						<textarea name="bio" id="" rows="3">프로그래머</textarea>
+						<textarea name="bio" id="" rows="3" value="${principal.user.bio}"></textarea>
 					</div>
 				</div>
 				<div class="content-item__07">
@@ -66,21 +66,21 @@
 				<div class="content-item__08">
 					<div class="item__title">이메일</div>
 					<div class="item__input">
-						<input type="text" name="email" placeholder="이메일"
-							value="getinthere@naver.com" readonly="readonly" />
+						<input type="text" name="email"
+							value="${principal.user.email}" readonly="readonly" />
 					</div>
 				</div>
 				<div class="content-item__09">
-					<div class="item__title">전회번호</div>
+					<div class="item__title">전화번호</div>
 					<div class="item__input">
-						<input type="text" name="tel" placeholder="전화번호"
-							value="0102222" />
+						<input type="text" name="tel"
+							value="${principal.user.tel}" />
 					</div>
 				</div>
 				<div class="content-item__10">
 					<div class="item__title">성별</div>
 					<div class="item__input">
-						<input type="text" name="gender" value="남" />
+						<input type="text" name="gender" value="${principal.user.gender}" />
 					</div>
 				</div>
 

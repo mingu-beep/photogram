@@ -33,6 +33,11 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    private String website;
+    private String bio;
+    private String tel;
+    private String gender;
+
     private String role;
 
     private LocalDateTime createDate;
