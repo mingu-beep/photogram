@@ -25,11 +25,10 @@ public class SecurityConfig {
                 // 이외 url 에 대해서는 허가
                 .anyRequest().permitAll()
                 .and()
-                // 인증 요청이 들어올 경우에는 loginPage에 지정한 페이지로 이동시킨다.
                 .formLogin()
-                .loginPage("/auth/signin")
-                // 인증 완료시 루트페이지로 이동
-                .defaultSuccessUrl("/");
+                .loginPage("/auth/signin") // GET : 인증 요청이 들어올 경우에는 loginPage에 지정한 페이지로 이동시킨다.
+                .loginProcessingUrl("/auth/signin") // POST : /auth/signin 요청이 들어왔을 떄 실행
+                .defaultSuccessUrl("/"); // 인증 완료시 루트페이지로 이동
 
         return http.build();
     }

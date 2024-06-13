@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -31,6 +32,8 @@ public class User {
 
     @Column(nullable = false)
     private String name;
+
+    private String role;
 
     private LocalDateTime createDate;
 
