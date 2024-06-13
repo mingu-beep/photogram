@@ -1,15 +1,21 @@
 package com.cos.photogram.web;
 
+import com.cos.photogram.domain.handler.ex.CustomValidationException;
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.service.AuthService;
 import com.cos.photogram.web.dto.auth.SignUpDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @RequestMapping("/auth")
@@ -33,7 +39,18 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public String postSignUp(HttpServletRequest request, SignUpDto signUpDto) {
+    public String postSignUp(HttpServletRequest request, @Valid SignUpDto signUpDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap();
+
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+                log.error(" XXXXX {}", error.getDefaultMessage());
+            }
+
+            throw new CustomValidationException("Validation Fail..", errorMap);
+        }
 
         log.info(" ##### [{}] {}", request.getMethod(), request.getRequestURI());
         log.info(" @@@@@ {}", signUpDto.toString());

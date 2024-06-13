@@ -20,9 +20,16 @@ public class User {
     @Column(unique = true)
     private Integer id;
 
+    @Column(unique = true, length = 20, nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String name;
 
     private LocalDateTime createDate;
