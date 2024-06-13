@@ -4,6 +4,7 @@ import com.cos.photogram.domain.user.User;
 import com.cos.photogram.domain.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 @Service
 public class UserService {
 
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
 
     @Transactional
@@ -22,7 +24,7 @@ public class UserService {
 
         // 2. 영속화된 오브젝트 수정
         userEntity.setName(user.getName());
-        userEntity.setPassword(user.getPassword());
+        userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setWebsite(user.getWebsite());
         userEntity.setBio(user.getBio());
         userEntity.setTel(user.getTel());

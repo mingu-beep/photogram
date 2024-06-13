@@ -49,7 +49,7 @@ public class AuthController {
                 log.error(" XXXXX {}", error.getDefaultMessage());
             }
 
-            throw new CustomValidationException("Validation Fail..", errorMap);
+            throw new CustomValidationException("입력 값이 유효하지 않습니다.", errorMap);
         }
 
         log.info(" ##### [{}] {}", request.getMethod(), request.getRequestURI());

@@ -15,9 +15,10 @@ function update(id, event) {
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         dataType: "json"
     }).done(res => { // 성공 로직 (HttpStatusCode == 200)
-        alert("수정 완료")
+        alert("회원 정보가 성공적으로 수정되었습니다.")
+        location.href = `/user/${id}`;
     }).fail(error => { // 실패 로직 (HttpStatusCode != 200)
-        alert("수정 실패")
+        alert("회원 정보가 수정되지 않았습니다. 원인 : " + error.responseJson.data)
     });
 
 }

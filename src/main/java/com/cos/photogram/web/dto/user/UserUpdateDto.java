@@ -3,11 +3,16 @@ package com.cos.photogram.web.dto.user;
 import com.cos.photogram.domain.user.User;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 public class UserUpdateDto {
 
     // 필수로 받아야하는 데이터
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String password;
 
     // 받지 않아도 되는 데이터
