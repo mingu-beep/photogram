@@ -9,12 +9,17 @@ public class CustomApiValidationException extends RuntimeException{
     private String msg;
     private Map<String, String> details;
 
+    public CustomApiValidationException(String msg) {
+        super(msg);
+        this.msg = msg;
+    }
+
     public CustomApiValidationException(String msg, Map<String, String> details) {
         this.msg = msg;
         this.details = details;
     }
 
-    public String getMsg() {
+    public String getMessage() {
         return msg;
     }
 

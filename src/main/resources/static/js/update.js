@@ -18,7 +18,13 @@ function update(id, event) {
         alert("회원 정보가 성공적으로 수정되었습니다.")
         location.href = `/user/${id}`;
     }).fail(error => { // 실패 로직 (HttpStatusCode != 200)
-        alert("회원 정보가 수정되지 않았습니다. 원인 : " + error.responseJson.data)
+        if(error.responseJSON.details == null) {
+            console.log(error);
+            alert(error.responseJSON.msg);
+        } else {
+            alert("회원 정보가 수정되지 않았습니다. 원인 : " + JSON.stringify(error.responseJSON.details));
+        }
+
     });
 
 }

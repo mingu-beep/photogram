@@ -28,9 +28,6 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(CustomApiValidationException.class)
     public ResponseEntity<CMRespDto<?>> updateApiValidationException(CustomApiValidationException e) {
-
-        log.error(" XXXXX {} / {}", e.getMsg(), e.getDetails().toString());
-
-        return new ResponseEntity<>(new CMRespDto<>(-1, e.getMsg(), e.getDetails()), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getDetails()), HttpStatus.BAD_REQUEST);
     }
 }
