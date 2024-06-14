@@ -29,8 +29,11 @@ public class SubscribeApiController {
     @PostMapping("/{toUserId}")
     public ResponseEntity<?> subscribe(@AuthenticationPrincipal PrincipalDetails principalDetails, @PathVariable Integer toUserId) {
 
-        subscribeService.subscribe(principalDetails.getUser().getId(), toUserId);
-        return new ResponseEntity<>(new CMRespDto<>(1, "구독하기 성공", null), HttpStatus.ACCEPTED);
+        Integer res = subscribeService.subscribe(principalDetails.getUser().getId(), toUserId);
+        
+        return res == null ?
+                new ResponseEntity<>(new CMRespDto<>(1, "재귀적 구독 요청", null), HttpStatus.ACCEPTED)
+                : new ResponseEntity<>(new CMRespDto<>(1, "구독하기 성공", null), HttpStatus.ACCEPTED);
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.cos.photogram.service;
 
+import com.cos.photogram.domain.handler.ex.CustomApiException;
 import com.cos.photogram.domain.subscribe.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,21 @@ public class SubscribeService {
     private final SubscribeRepository subscribeRepository;
 
     @Transactional
-    public String subscribe(Integer fromUserId, Integer toUserId) {
+    public Integer subscribe(Integer fromUserId, Integer toUserId) {
+        try {
+            if(fromUserId.equals(toUserId)) {
+                return null;
+            } else {
+                return subscribeRepository.insertSubscribe(fromUserId, toUserId);
+            }
+        } catch (Exception e) {
+            throw new CustomApiException("이미 구독한 사용자입니다.");
+        }
 
-        subscribeRepository.insertSubscribe(fromUserId, toUserId);
-        return null;
     }
 
     @Transactional
-    public String unsubscribe(Integer fromUserId, Integer toUserId) {
+    public void unsubscribe(Integer fromUserId, Integer toUserId) {
         subscribeRepository.deleteSubscribe(fromUserId, toUserId);
-        return null;
     }
 }

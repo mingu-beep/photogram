@@ -1,5 +1,6 @@
 package com.cos.photogram.domain.handler;
 
+import com.cos.photogram.domain.handler.ex.CustomApiException;
 import com.cos.photogram.domain.handler.ex.CustomApiValidationException;
 import com.cos.photogram.domain.handler.ex.CustomValidationException;
 import com.cos.photogram.util.Script;
@@ -29,5 +30,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomApiValidationException.class)
     public ResponseEntity<CMRespDto<?>> updateApiValidationException(CustomApiValidationException e) {
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), e.getDetails()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomApiException.class)
+    public ResponseEntity<?> apiException(CustomApiException e) {
+        return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
     }
 }
