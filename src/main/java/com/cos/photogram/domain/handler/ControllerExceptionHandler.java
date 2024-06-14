@@ -20,11 +20,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomValidationException.class)
     public String signInValidationException(CustomValidationException e) {
 
-        log.error(" XXXXX {} / {}", e.getMsg(), e.getDetails().toString());
-
-//        return new CMRespDto<>(-1, e.getMsg(), e.getDetails());
-
-        return Script.back(e.getDetails().toString());
+        return e.getDetails() == null ? Script.back(e.getMsg().toString()) : Script.back(e.getDetails().toString());
     }
 
     @ExceptionHandler(CustomApiValidationException.class)

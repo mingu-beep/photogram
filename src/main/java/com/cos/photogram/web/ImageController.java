@@ -1,6 +1,7 @@
 package com.cos.photogram.web;
 
 import com.cos.photogram.config.auth.PrincipalDetails;
+import com.cos.photogram.domain.handler.ex.CustomValidationException;
 import com.cos.photogram.service.ImageService;
 import com.cos.photogram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,10 @@ public class ImageController {
      */
     @PostMapping
     public String upload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        log.info(" ----- POST UPLOAD");
+
+        if (imageUploadDto.getFile().isEmpty()) {
+            throw new CustomValidationException("이미지가 선택되지 않았습니다.");
+        }
 
         imageService.uploadImage(imageUploadDto, principalDetails.getUser());
 

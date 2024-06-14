@@ -9,6 +9,10 @@ public class CustomValidationException extends RuntimeException{
     private String msg;
     private Map<String, String> details;
 
+    public CustomValidationException(String msg) {
+        this.msg = msg;
+    }
+
     public CustomValidationException(String msg, Map<String, String> details) {
         this.msg = msg;
         this.details = details;

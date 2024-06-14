@@ -1,5 +1,6 @@
 package com.cos.photogram.service;
 
+import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.image.ImageRepository;
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.web.dto.image.ImageUploadDto;
@@ -44,6 +45,9 @@ public class ImageService {
             //
         }
 
+        // DB 저장 ImageUploadDto -> image -> imageRepository.save()
+        Image imageEntity = imageUploadDto.toEntity(filename, user);
+        imageRepository.save(imageEntity);
 
     }
 }
