@@ -21,7 +21,7 @@ public class SecurityConfig {
 
         http.authorizeRequests()
                 // 인증을 진행할 url 지정
-                .antMatchers("/", "/user/**", "/image/**","/subscribe/**", "/comment/**").authenticated()
+                .antMatchers("/", "/user/**", "/image/**","/subscribe/**", "/comment/**", "/api/**").authenticated()
                 // 이외 url 에 대해서는 허가
                 .anyRequest().permitAll()
                 .and()
