@@ -3,15 +3,13 @@ package com.cos.photogram.service;
 import com.cos.photogram.domain.handler.ex.CustomApiValidationException;
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.domain.user.UserRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.function.Supplier;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class UserService {
 

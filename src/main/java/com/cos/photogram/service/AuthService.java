@@ -3,6 +3,7 @@ package com.cos.photogram.service;
 
 import com.cos.photogram.domain.user.User;
 import com.cos.photogram.domain.user.UserRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,16 +12,12 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class AuthService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public AuthService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional // 트랜잭션 관리 애노테이션
     public User signUpService(User user) {

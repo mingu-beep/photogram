@@ -7,6 +7,7 @@ import com.cos.photogram.domain.user.User;
 import com.cos.photogram.service.UserService;
 import com.cos.photogram.web.dto.CMRespDto;
 import com.cos.photogram.web.dto.user.UserUpdateDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,16 +24,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController // api 응답 시 사용
 @RequestMapping("/api/user")
 public class UserApiController {
 
-    private UserService userService;
-
-    @Autowired
-    public UserApiController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @PutMapping("/{id}")
     public CMRespDto<?> update(@PathVariable Integer id
