@@ -35,10 +35,10 @@
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${dto.isSubscribe}">
-                                <button class="cta blue" onclick="toggleSubscribe(this)">구독취소</button>
+                                <button class="cta blue" onclick="toggleSubscribe(this, ${dto.user.id})">구독취소</button>
                             </c:when>
                             <c:otherwise>
-                                <button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
+                                <button class="cta" onclick="toggleSubscribe(this, ${dto.user.id})">구독하기</button>
                             </c:otherwise>
                         </c:choose>
 
