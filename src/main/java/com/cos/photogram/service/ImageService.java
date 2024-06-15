@@ -12,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,6 +29,7 @@ public class ImageService {
     @Value("${file.path}")
     private String uploadFolder;
 
+    @Transactional
     public void uploadImage(ImageUploadDto imageUploadDto, User user) {
         // 이미지는 파일 형태로 서버에 저장되고, DB에는 경로만 저장된다.
         MultipartFile uploadFile = imageUploadDto.getFile();

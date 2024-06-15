@@ -2,6 +2,7 @@ package com.cos.photogram.domain.handler;
 
 import com.cos.photogram.domain.handler.ex.CustomApiException;
 import com.cos.photogram.domain.handler.ex.CustomApiValidationException;
+import com.cos.photogram.domain.handler.ex.CustomException;
 import com.cos.photogram.domain.handler.ex.CustomValidationException;
 import com.cos.photogram.util.Script;
 import com.cos.photogram.web.dto.CMRespDto;
@@ -20,7 +21,7 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomValidationException.class)
     public String signInValidationException(CustomValidationException e) {
 
-        return e.getDetails() == null ? Script.back(e.getMsg().toString()) : Script.back(e.getDetails().toString());
+        return e.getDetails() == null ? Script.back(e.getMsg()) : Script.back(e.getDetails().toString());
     }
 
     @ExceptionHandler(CustomApiValidationException.class)
@@ -31,5 +32,10 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(CustomApiException.class)
     public ResponseEntity<?> apiException(CustomApiException e) {
         return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CustomException.class)
+    public String exception(CustomException e) {
+        return Script.back(e.getMsg());
     }
 }
