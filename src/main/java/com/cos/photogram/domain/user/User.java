@@ -36,6 +36,8 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    private String profileImageUrl;
+
     private String website;
     private String bio;
     private String tel;

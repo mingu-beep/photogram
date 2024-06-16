@@ -38,12 +38,51 @@ function toggleSubscribe(obj, toUserId) {
 }
 
 // (2) 구독자 정보  모달 보기
-function subscribeInfoModalOpen() {
-	$(".modal-subscribe").css("display", "flex");
+function subscribeInfoModalOpen(id) {
+
+	$.ajax({
+	    type:"get",
+	    url:`/api/user/${id}/subscribe`,
+	    datatype:"json"
+	}).done(res => {
+
+	    console.log("성공", res.details);
+
+	    $(".modal-subscribe").css("display", "flex");
+	    res.details.forEach((u) => {
+	    let item = getSubscribeModalItem(u);
+	        $("#subscribeModalList").append(item);
+	    });
+	}).fail(error => {
+	    console.log("fail", error);
+	});
 }
 
-function getSubscribeModalItem() {
+function getSubscribeModalItem(obj) {
 
+    let item = `
+    <div class="subscribe__item" id="subscribeModalItem-1">
+        <div class="subscribe__img">
+            <img src="#" onerror="this.src='/images/person.jpeg'"/>
+        </div>
+        <div class="subscribe__text">
+            <h2>${obj.username}</h2>
+        </div>
+        <div class="subscribe__btn">`;
+
+    if(!obj.equalUserState) { // 로그인 유저와 모달에 뜬 유저가 동일인물이 아닐 경우
+        if(obj.subscribeState) { // 동일 유저가 아닐때, 해당 유저를 구독한 상태
+            item += `<button class="cta blue" onclick="toggleSubscribe(this, ${obj.id})">구독취소</button>`;
+        } else { // 동일 유저가 아닐 때, 해당 유저를 구독하지 않은 상태
+            item += `<button class="cta" onclick="toggleSubscribe(this, ${obj.id}})">구독하기</button>`;
+        }
+    }
+
+    item += `
+        </div>
+    </div>`;
+
+    return item;
 }
 
 
