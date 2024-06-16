@@ -16,25 +16,23 @@ function toggleSubscribe(obj, toUserId) {
 	$.ajax({
 	    type: "delete",
 	    url: "/api/subscribe/" + toUserId,
-        type: "json"
+        datatype: "json"
 	}).done(res => {
         $(obj).text("구독하기");
         $(obj).toggleClass("blue");
     }).fail(error => {
         console.log("구독 실패");
-        console.log(error.responseJSON);
     });
 	} else {
 		$.ajax({
             type: "post",
             url: "/api/subscribe/" + toUserId,
-            type: "json"
+            datatype: "json"
         }).done(res => {
             $(obj).text("구독취소");
             $(obj).toggleClass("blue");
         }).fail(error => {
             console.log("구독 취소 실패");
-            console.log(error.responseJSON);
         });
 	}
 }
