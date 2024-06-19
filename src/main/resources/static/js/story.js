@@ -51,19 +51,19 @@ function getStoryItem(image) {
                 <div class="sl__item__contents__icon">
 
                     <button>
-                        <i class="fas fa-heart active" id="storyLikeIcon-1" onclick="toggleLike()"></i>
+                        <i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>
                     </button>
                 </div>
 
-                <span class="like"><b id="storyLikeCount-1">3 </b>likes</span>
+                <span class="like"><b id="storyLikeCount-${image.id}}">3 </b>likes</span>
 
                 <div class="sl__item__contents__content">
                     <p>${image.caption}</p>
                 </div>
 
-                <div id="storyCommentList-1">
+                <div id="storyCommentList-${image.id}">
 
-                    <div class="sl__item__contents__comment" id="storyCommentItem-1"">
+                    <div class="sl__item__contents__comment" id="storyCommentItem-${image.id}"">
                         <p>
                             <b>Lovely :</b> 부럽습니다.
                         </p>
@@ -77,7 +77,7 @@ function getStoryItem(image) {
                 </div>
 
                 <div class="sl__item__input">
-                    <input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
+                    <input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
                     <button type="button" onClick="addComment()">게시</button>
                 </div>
 
@@ -104,16 +104,39 @@ $(window).scroll(() => {
 
 
 // (3) 좋아요, 안좋아요
-function toggleLike() {
-	let likeIcon = $("#storyLikeIcon-1");
-	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
+function toggleLike(imageId) {
+	let likeIcon = $(`#storyLikeIcon-${imageId}`);
+	if (likeIcon.hasClass("far")) { // 좋아요
+	    $.ajax({
+	        type:"post",
+	        url:`/api/image/${imageId}/likes`,
+	        datatype:"json"
+	    }).done(res => {
+            console.log(" 좋아요 성공 ");
+            likeIcon.addClass("fas");
+            likeIcon.addClass("active");
+            likeIcon.removeClass("far");
+
+	    }).fail(err => {
+	        console.log(" 좋아요 실패 ");
+	    });
+	} else { // 구독 취소
+
+	    $.ajax({
+            type:"delete",
+            url:`/api/image/${imageId}/likes`,
+            datatype:"json"
+        }).done(res => {
+            console.log(" 좋아요 취소 성공 ");
+
+            likeIcon.removeClass("fas");
+            likeIcon.removeClass("active");
+            likeIcon.addClass("far");
+
+        }).fail(err => {
+            console.log(" 좋아요 취소 실패 ");
+        });
+
 	}
 }
 
