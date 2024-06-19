@@ -7,14 +7,17 @@
 	(5) 댓글삭제
  */
 
+let page = 0;
+
 // (1) 스토리 로드하기
 function storyLoad() {
     $.ajax({
         type:"get",
-        url:"/api/image",
+        url:`/api/image?page=${page}`,
         datatype:"json"
     }).done(res => {
-        let images = res.details;
+        let images = res.details ;
+        console.log(images);
         res.details.forEach((image) => {
             let item = getStoryItem(image);
             $("#storyList").append(item);
@@ -86,7 +89,17 @@ function getStoryItem(image) {
 
 // (2) 스토리 스크롤 페이징하기
 $(window).scroll(() => {
+// document.height = window.scrollTop + window.height;
+//    $(window).scrollTop();
+//    $(document).height();
+//    $(window).height();
 
+    let checkScroll = $(document).height() - $(window).height() - $(window).scrollTop();
+
+    if(checkScroll < 1 && checkScroll > -1) {
+        page++;
+        storyLoad();
+    }
 });
 
 

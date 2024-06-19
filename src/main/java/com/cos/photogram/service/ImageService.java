@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.jni.File;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +32,8 @@ public class ImageService {
     private String uploadFolder;
 
     @Transactional(readOnly = true)
-    public List<Image> loadImageList(int fromUserId) {
-        return imageRepository.selectImageList(fromUserId);
+    public List<Image> loadImageList(int fromUserId, Pageable pageable) {
+        return imageRepository.selectImageList(fromUserId, pageable);
     }
 
     @Transactional

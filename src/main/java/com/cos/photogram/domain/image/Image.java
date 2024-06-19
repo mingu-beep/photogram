@@ -27,6 +27,7 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnoreProperties({"images"})
     private User user;
 
     // 이미지 좋아요
