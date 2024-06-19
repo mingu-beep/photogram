@@ -1,6 +1,7 @@
 package com.cos.photogram.domain.image;
 
 import com.cos.photogram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
