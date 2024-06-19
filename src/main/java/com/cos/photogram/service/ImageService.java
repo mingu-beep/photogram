@@ -33,7 +33,17 @@ public class ImageService {
 
     @Transactional(readOnly = true)
     public List<Image> loadImageList(int fromUserId, Pageable pageable) {
-        return imageRepository.selectImageList(fromUserId, pageable);
+        List<Image> imageList = imageRepository.selectImageList(fromUserId, pageable);
+
+        imageList.forEach((image -> {
+            image.getLikes().forEach((like) -> {
+                if(like.getUser().getId() == fromUserId) {
+                    image.setLikeState(true);
+                }
+            });
+            image.setLikeCount(image.getLikes().size());
+        }));
+        return imageList;
     }
 
     @Transactional

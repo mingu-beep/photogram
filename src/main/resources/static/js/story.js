@@ -49,13 +49,19 @@ function getStoryItem(image) {
 
             <div class="sl__item__contents">
                 <div class="sl__item__contents__icon">
+                    <button>`;
 
-                    <button>
-                        <i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>
+    if(image.likeState) {
+        item +=  `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+    } else {
+        item +=  `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+    }
+
+    item += `
                     </button>
                 </div>
 
-                <span class="like"><b id="storyLikeCount-${image.id}}">3 </b>likes</span>
+                <span class="like"><b id="storyLikeCount-${image.id}}">${image.likeCount} </b>likes</span>
 
                 <div class="sl__item__contents__content">
                     <p>${image.caption}</p>
@@ -112,13 +118,11 @@ function toggleLike(imageId) {
 	        url:`/api/image/${imageId}/likes`,
 	        datatype:"json"
 	    }).done(res => {
-            console.log(" 좋아요 성공 ");
             likeIcon.addClass("fas");
             likeIcon.addClass("active");
             likeIcon.removeClass("far");
 
 	    }).fail(err => {
-	        console.log(" 좋아요 실패 ");
 	    });
 	} else { // 구독 취소
 
@@ -127,14 +131,12 @@ function toggleLike(imageId) {
             url:`/api/image/${imageId}/likes`,
             datatype:"json"
         }).done(res => {
-            console.log(" 좋아요 취소 성공 ");
 
             likeIcon.removeClass("fas");
             likeIcon.removeClass("active");
             likeIcon.addClass("far");
 
         }).fail(err => {
-            console.log(" 좋아요 취소 실패 ");
         });
 
 	}

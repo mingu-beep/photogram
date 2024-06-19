@@ -2,6 +2,7 @@ package com.cos.photogram.domain.likes;
 
 import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +41,7 @@ public class Likes { // 1 N
      */
     private User user; // 1
 
+    @JsonIgnoreProperties({"likes"})
     @JoinColumn(name = "imageId")
     @ManyToOne
     /*
