@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
+<input display="none" id="loginUserId" type="number" value="${principal.user.id}"/>
 <main class="main">
 	<section class="container">
 		<!--전체 리스트 시작-->
