@@ -2,15 +2,19 @@ package com.cos.photogram.web;
 
 import com.cos.photogram.config.auth.PrincipalDetails;
 import com.cos.photogram.domain.handler.ex.CustomValidationException;
+import com.cos.photogram.domain.image.Image;
 import com.cos.photogram.service.ImageService;
 import com.cos.photogram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,7 +30,10 @@ public class ImageController {
     }
 
     @GetMapping("/popular")
-    public String popularPage() {
+    public String popularPage(Model model) {
+
+        List<Image> imageList = imageService.loadPopularImage();
+        model.addAttribute("images", imageList);
         return "image/popular";
     }
 

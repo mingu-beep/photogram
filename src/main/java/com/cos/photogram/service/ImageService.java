@@ -69,4 +69,11 @@ public class ImageService {
         imageRepository.save(imageEntity);
 
     }
+    
+    @Transactional(readOnly = true)
+    public List<Image> loadPopularImage() {
+        List<Image> imageList = imageRepository.selectPopular();
+        return imageList;
+
+    }
 }
