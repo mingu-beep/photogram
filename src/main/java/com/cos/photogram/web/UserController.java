@@ -40,6 +40,12 @@ public class UserController {
         // 3. User 정보
         // 4. 구독 여부
         // 5. 구독자 수
+
+        // 6. 이미지 별 좋아요 수
+        userEntity.getImages().forEach((image) -> {
+            image.setLikeCount(image.getLikes().size());
+        });
+
         UserProfileDto userProfileDto = new UserProfileDto(
                 (principalDetails.getUser().getId() == profileId)
                 , userEntity.getImages().size()
