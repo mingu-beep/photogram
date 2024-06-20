@@ -22,8 +22,6 @@ function storyLoad() {
             let item = getStoryItem(image);
             $("#storyList").append(item);
         });
-        getStoryItem(images);
-        console.log("done", images);
     }).fail(err => {
         console.log("fail", err);
     });
@@ -37,7 +35,7 @@ function getStoryItem(image) {
         <div class="story-list__item">
             <div class="sl__item__header">
                 <div>
-                    <img class="profile-image" src="'/upload/${image.user.profileImageUrl}'"
+                    <img class="profile-image" src="/upload/${image.user.profileImageUrl}"
                         onerror="this.src='/images/person.jpeg'" />
                 </div>
                 <div>${image.user.username}</div>

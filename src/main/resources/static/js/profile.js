@@ -98,7 +98,7 @@ function toggleSubscribeModal(obj) {
 }
 
 // (4) 유저 프로파일 사진 변경 (완)
-function profileImageUpload() {
+function profileImageUpload(loginUserId) {
 	$("#userProfileImageInput").click();
 
 	$("#userProfileImageInput").on("change", (e) => {
@@ -109,12 +109,33 @@ function profileImageUpload() {
 			return;
 		}
 
-		// 사진 전송 성공시 이미지 변경
-		let reader = new FileReader();
-		reader.onload = (e) => {
-			$("#userProfileImage").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+        // 서버에 이미지 전송
+        let profileImageForm = $("#userProfileImageForm")[0];
+
+        // Ajax로 form 데이터를 전송하기 위해 FormData 객체에 담기
+        let formData = new FormData(profileImageForm);
+
+        $.ajax({
+            type: "put",
+            url: `/api/user/${loginUserId}/profileImage`,
+            data : formData,
+            contentType: false, // true 일 경우 x-www-form-urlencoded
+            processData : false,
+            enctype : "multipart/form-data",
+            dataType : "json"
+        }).done(res => {
+            // 사진 전송 성공시 이미지 변경
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $("#userProfileImage").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+        }).fail(error => {
+            console.log("오류", error);
+        });
+
+
+
 	});
 }
 
@@ -143,6 +164,12 @@ function modalImage() {
 function modalClose() {
 	$(".modal-subscribe").css("display", "none");
 	location.reload();
+}
+
+// (+) 사용자 id 체킹
+function checkUserId(profileUserId, loginUserId) {
+    if(profileUserId == loginUserId)
+        popup('.modal-image');
 }
 
 

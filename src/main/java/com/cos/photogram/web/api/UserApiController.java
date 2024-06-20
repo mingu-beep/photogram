@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -72,4 +73,12 @@ public class UserApiController {
         return new CMRespDto<>(1, "회원수정완료", userEntity);
     }
 
+    @PutMapping("/{loginUserId}/profileImage")
+    public ResponseEntity<?> putProfileImage(@PathVariable Integer loginUserId,
+                                             MultipartFile profileImageFile) {
+
+        userService.updateProfileImage(loginUserId, profileImageFile);
+
+        return new ResponseEntity<>(new CMRespDto<>(1, "프로필 이미지 저장 성공", null), HttpStatus.OK);
+    }
 }
