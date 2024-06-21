@@ -39,17 +39,6 @@ public class AuthController {
     @PostMapping("/signup")
     public String postSignUp(HttpServletRequest request, @Valid SignUpDto signUpDto, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap();
-
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-                log.error(" XXXXX {}", error.getDefaultMessage());
-            }
-
-            throw new CustomValidationException("입력 값이 유효하지 않습니다.", errorMap);
-        }
-
         log.info(" ##### [{}] {}", request.getMethod(), request.getRequestURI());
         log.info(" @@@@@ {}", signUpDto.toString());
 

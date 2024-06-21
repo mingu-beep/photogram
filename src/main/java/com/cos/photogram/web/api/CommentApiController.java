@@ -32,17 +32,6 @@ public class CommentApiController {
                                             BindingResult bindingResult,
                                             @AuthenticationPrincipal PrincipalDetails principalDetails) {
 
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorMap = new HashMap();
-
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-
-            throw new CustomApiValidationException("공백을 허용하지 않습니다.", errorMap);
-        }
-
-
         Comment comment = commentService.saveComment(commentSaveDto, principalDetails.getUser().getId());
 
         return new ResponseEntity<>(new CMRespDto<>(1, "댓글 저장 성공", comment), HttpStatus.CREATED);
