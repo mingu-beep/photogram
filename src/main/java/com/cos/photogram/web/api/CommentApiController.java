@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,5 +27,15 @@ public class CommentApiController {
 
         return new ResponseEntity<>(new CMRespDto<>(1, "댓글 저장 성공", comment), HttpStatus.CREATED);
 
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> removeCommentApi(@PathVariable Integer commentId) {
+
+        log.info(" @@@@@ 삭제 API 동작 {}", commentId);
+
+        commentService.deleteComment(commentId);
+
+        return new ResponseEntity<>(new CMRespDto<>(1, "댓글 삭제 성공", null), HttpStatus.ACCEPTED);
     }
 }

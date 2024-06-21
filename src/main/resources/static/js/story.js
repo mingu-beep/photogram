@@ -75,13 +75,17 @@ function getStoryItem(image) {
             <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
                 <p>
                     <b>${comment.user.username} :</b> ${comment.content}
-                </p>
+                </p>`;
 
-                <button>
+        if(comment.user.id == loginUserId){
+            item += `
+                <button onclick="deleteComment(${comment.id})">
                     <i class="fas fa-times"></i>
                 </button>
-
-            </div>`
+            `; // 삭제 버튼
+        }
+        item += `
+            </div>`;
     });
 
 
@@ -188,7 +192,7 @@ function addComment(imageId) {
                       <b>${comment.user.username}</b>
                       ${comment.content}
                     </p>
-                    <button><i class="fas fa-times"></i></button>
+                    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
                   </div>
         `;
         commentList.prepend(content);
@@ -200,8 +204,20 @@ function addComment(imageId) {
 }
 
 // (5) 댓글 삭제
-function deleteComment() {
+function deleteComment(commentId) {
+    console.log("댓글 삭제 ", commentId);
+    $.ajax({
+        type:"delete",
+        url:`/api/comment/${commentId}`,
+        datatype:"json"
+    }).done(res => {
+        console.log("삭제 성공 ", res);
 
+        $(`#storyCommentItem-${commentId}`).remove();
+
+    }).fail(err => {
+        console.log("삭제 실패 ", err);
+    });
 }
 
 
