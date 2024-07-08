@@ -1,14 +1,21 @@
 # 포토그램 - 인스타그램 클론 코딩
 
-### STS 툴 버그가 발견되면 다른 버전으로 다운 받는 법
-- https://github.com/spring-projects/sts4/wiki/Previous-Versions
+> Spring boot를 활용하여 인스타그램을 클론코딩함으로써 Spring boot와 MariaDB에 대한 이해도를 높이고자 함
 
-### STS 툴에 세팅하기 - 플러그인 설정 (JSP, Javascript)
-- https://blog.naver.com/getinthere/222322821611
+## 구현 기능
+1. Spring Security를 활용한 회원 로그인 기능
+2. 회원가입 : Validation을 활용한 입력 form 처리
+3. MVC 패턴을 이용한 게시글 작성
+4. MultipartFile을 활용한 이미지 업로드 기능 구현 (게시글. 유저 프로필에 활용)
+5. 1:N 의 사상관계를 활용한 구독 서비스 구현
+6. 게시글 별 좋아요, 댓글 기능 구현
+7. AOP를 활용한 에러 공통 처리 기능
+8. OAuth2 Facebook 로그인 기능
+
 
 ### 의존성
 
-- Sring Boot DevTools
+- Spring Boot DevTools
 - Lombok
 - Spring Data JPA
 - MariaDB Driver
@@ -96,3 +103,4 @@ spring:
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 ```
+
